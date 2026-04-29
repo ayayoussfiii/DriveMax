@@ -1,12 +1,9 @@
- 
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.DriveMax" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.DriveMax" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-    </style>
-    <style name="Theme.DriveMax.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/colorWhite</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 </resources>
