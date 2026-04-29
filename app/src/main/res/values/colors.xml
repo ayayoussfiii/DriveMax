@@ -10,17 +10,27 @@
     <color name="colorGradientStart">#4A6CF7</color>
     <color name="colorGradientEnd">#7C4DFF</color>
 
-    <!-- Background -->
+    <!-- Background light -->
     <color name="colorBackground">#F8F9FF</color>
     <color name="colorSurface">#FFFFFF</color>
     <color name="colorCardBg">#FFFFFF</color>
     <color name="colorOverlay">#1A4A6CF7</color>
+    <color name="colorFieldBorder">#E5E5EA</color>
 
-    <!-- Texte -->
+    <!-- Background dark -->
+    <color name="colorBackgroundDark">#000000</color>
+    <color name="colorSurfaceDark">#1C1C1E</color>
+    <color name="colorFieldBorderDark">#2C2C2E</color>
+
+    <!-- Texte light -->
     <color name="colorTextPrimary">#1A1A2E</color>
     <color name="colorTextSecondary">#6B7280</color>
     <color name="colorTextLight">#FFFFFF</color>
     <color name="colorTextDark">#1A1A2E</color>
+
+    <!-- Texte dark -->
+    <color name="colorTextPrimaryDark">#FFFFFF</color>
+    <color name="colorTextSecondaryDark">#8E8E93</color>
 
     <!-- Status cards -->
     <color name="colorGreen">#10B981</color>
