@@ -1,1 +1,14 @@
  
+<resources>
+    <string name="app_name">DriveMax</string>
+    <string name="login">Connexion</string>
+    <string name="register">Inscription</string>
+    <string name="email">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="save">Enregistrer</string>
+    <string name="cancel">Annuler</string>
+    <string name="confirm">Confirmer</string>
+    <string name="delete">Supprimer</string>
+    <string name="search">Rechercher</string>
+    <string name="no_data">Aucune donnée disponible</string>
+</resources>
