@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Thème CLAIR -->
-    <style name="Theme.DriveMax.Light" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/colorWhite</item>
-        <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="colorSurface">@color/colorSurface</item>
-    </style>
-
-    <!-- Thème SOMBRE -->
-    <style name="Theme.DriveMax.Dark" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorOnPrimary">@color/colorWhite</item>
-        <item name="android:windowBackground">@color/colorBackgroundDark</item>
-        <item name="colorSurface">@color/colorSurfaceDark</item>
-    </style>
-
-    <!-- Thème principal (DayNight — suit le toggle) -->
+    <!-- Thème principal DayNight (suit le toggle clair/sombre) -->
     <style name="Theme.DriveMax" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/colorWhite</item>
+    </style>
+
+    <!-- Thème Splash -->
+    <style name="Theme.DriveMax.Splash" parent="Theme.DriveMax">
+        <item name="android:windowBackground">@drawable/gradient_header</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>
