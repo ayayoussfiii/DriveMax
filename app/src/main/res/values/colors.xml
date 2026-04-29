@@ -1,43 +1,43 @@
- 
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Couleurs principales -->
-    <color name="colorPrimary">#1A1A2E</color>
-    <color name="colorPrimaryDark">#16213E</color>
+    <!-- Principales -->
+    <color name="colorPrimary">#4A6CF7</color>
+    <color name="colorPrimaryDark">#3654D6</color>
     <color name="colorAccent">#7C4DFF</color>
-    <color name="colorSecondary">#0F3460</color>
+    <color name="colorSecondary">#6C63FF</color>
 
     <!-- Gradient -->
-    <color name="colorGradientStart">#1A1A2E</color>
+    <color name="colorGradientStart">#4A6CF7</color>
     <color name="colorGradientEnd">#7C4DFF</color>
 
-    <!-- UI -->
-    <color name="colorBackground">#F5F5F5</color>
-    <color name="colorSurface">#242444</color>
-    <color name="colorOverlay">#33FFFFFF</color>
+    <!-- Background -->
+    <color name="colorBackground">#F8F9FF</color>
+    <color name="colorSurface">#FFFFFF</color>
     <color name="colorCardBg">#FFFFFF</color>
+    <color name="colorOverlay">#1A4A6CF7</color>
 
     <!-- Texte -->
-    <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextSecondary">#B0BEC5</color>
+    <color name="colorTextPrimary">#1A1A2E</color>
+    <color name="colorTextSecondary">#6B7280</color>
+    <color name="colorTextLight">#FFFFFF</color>
     <color name="colorTextDark">#1A1A2E</color>
 
-    <!-- Status -->
-    <color name="colorSuccess">#00E676</color>
-    <color name="colorDanger">#FF1744</color>
-    <color name="colorWarning">#FF9100</color>
-    <color name="colorInfo">#00B0FF</color>
+    <!-- Status cards -->
+    <color name="colorGreen">#10B981</color>
+    <color name="colorRed">#EF4444</color>
+    <color name="colorOrange">#F59E0B</color>
+    <color name="colorBlue">#4A6CF7</color>
+    <color name="colorPurple">#7C4DFF</color>
 
     <!-- Basiques -->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
-    <color name="colorGray">#9E9E9E</color>
-    <color name="colorLightGray">#F5F5F5</color>
+    <color name="colorGray">#9CA3AF</color>
+    <color name="colorLightGray">#F3F4F6</color>
 
-    <!-- Dashboard cards -->
-    <color name="colorGreen">#4CAF50</color>
-    <color name="colorRed">#F44336</color>
-    <color name="colorOrange">#FF9800</color>
-    <color name="colorBlue">#2196F3</color>
-    <color name="colorPurple">#9C27B0</color>
+    <!-- Success/Danger/Warning -->
+    <color name="colorSuccess">#10B981</color>
+    <color name="colorDanger">#EF4444</color>
+    <color name="colorWarning">#F59E0B</color>
+    <color name="colorInfo">#4A6CF7</color>
 </resources>
