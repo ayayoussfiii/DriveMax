@@ -1,1 +1,46 @@
  
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvMontant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="Montant" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/tvMethode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Méthode" />
+
+        <TextView
+            android:id="@+id/tvStatut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statut" />
+
+        <TextView
+            android:id="@+id/tvReference"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Référence" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
