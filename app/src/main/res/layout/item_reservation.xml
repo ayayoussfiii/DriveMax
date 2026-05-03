@@ -1,1 +1,125 @@
  
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_reservation_card"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Ligne 1: ID et Statut -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvReservationId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ID: "
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#26304A" />
+
+            <TextView
+                android:id="@+id/tvStatut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_card_purple_light"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="Statut"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- Ligne 2: Dates -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="14dp">
+
+            <TextView
+                android:id="@+id/tvDateDebut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Début"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#2F3A5A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" → "
+                android:textSize="13sp"
+                android:textColor="#666666" />
+
+            <TextView
+                android:id="@+id/tvDateFin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fin"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#2F3A5A" />
+
+        </LinearLayout>
+
+        <!-- Ligne 3: Durée -->
+        <TextView
+            android:id="@+id/tvDuree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Durée"
+            android:textSize="11sp"
+            android:textColor="#7B849D"
+            android:layout_marginTop="6dp" />
+
+        <!-- Ligne 4: Prix Total -->
+        <TextView
+            android:id="@+id/tvPrixTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0 MAD"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:textColor="#2D5BFF"
+            android:layout_marginTop="10dp" />
+
+        <!-- Message de retard -->
+        <TextView
+            android:id="@+id/tvRetard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏰ En retard"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#F44336"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
