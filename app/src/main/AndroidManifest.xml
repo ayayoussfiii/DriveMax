@@ -1,17 +1,23 @@
-
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- ── Permissions ───────────────────── -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -20,70 +26,55 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DriveMax"
-        android:usesCleartextTraffic="true">
+        tools:targetApi="31">
 
-        <!-- ── Google Maps API Key ───────── -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="VOTRE_CLE_GOOGLE_MAPS_ICI" />
+            android:value="YOUR_MAPS_API_KEY" />
 
-        <!-- ── AUTH ─────────────────────── -->
+        <!-- Splash -->
         <activity
             android:name=".view.auth.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.DriveMax">
+            android:theme="@style/Theme.DriveMax.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.auth.LoginActivity"
-            android:exported="false" />
-        <activity android:name=".view.auth.RegisterActivity"
-            android:exported="false" />
+        <!-- Auth -->
+        <activity android:name=".view.auth.LoginActivity" android:exported="false" />
+        <activity android:name=".view.auth.RegisterActivity" android:exported="false" />
 
-        <!-- ── ADMIN ─────────────────────── -->
-        <activity android:name=".view.admin.AdminDashboardActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.GestionVoituresActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.VoitureFormActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.GestionClientsActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.ClientFormActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.ToutesReservationsActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.ReservationDetailActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.HistoriquePaiementsActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.StatistiquesActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.CarteGpsActivity"
-            android:exported="false" />
-        <activity android:name=".view.admin.ContratActivity"
-            android:exported="false" />
+        <!-- Admin -->
+        <activity android:name=".view.admin.AdminDashboardActivity" android:exported="false" />
+        <activity android:name=".view.admin.GestionClientsActivity" android:exported="false" />
+        <activity android:name=".view.admin.GestionVoituresActivity" android:exported="false" />
+        <activity android:name=".view.admin.ToutesReservationsActivity" android:exported="false" />
+        <activity android:name=".view.admin.ReservationDetailActivity" android:exported="false" />
+        <activity android:name=".view.admin.ClientFormActivity" android:exported="false" />
+        <activity android:name=".view.admin.VoitureFormActivity" android:exported="false" />
+        <activity android:name=".view.admin.VoitureDetailActivity" android:exported="false" />
+        <activity android:name=".view.admin.NouvelleReservationActivity" android:exported="false" />
+        <activity android:name=".view.admin.ContratActivity" android:exported="false" />
+        <activity android:name=".view.admin.HistoriquePaiementsActivity" android:exported="false" />
+        <activity android:name=".view.admin.StatistiquesActivity" android:exported="false" />
+        <activity android:name=".view.admin.CarteGpsActivity" android:exported="false" />
 
-        <!-- ── CLIENT ────────────────────── -->
-        <activity android:name=".view.client.ClientDashboardActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.CatalogueActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.VoitureDetailActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.NouvelleReservationActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.MesReservationsActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.MesPaiementsActivity"
-            android:exported="false" />
-        <activity android:name=".view.client.MonProfilActivity"
-            android:exported="false" />
+        <!-- Client -->
+        <activity android:name=".view.client.ClientDashboardActivity" android:exported="false" />
+        <activity android:name=".view.client.CatalogueActivity" android:exported="false" />
+        <activity android:name=".view.client.VoitureDetailActivity" android:exported="false" />
+        <activity android:name=".view.client.NouvelleReservationActivity" android:exported="false" />
+        <activity android:name=".view.client.MesReservationsActivity" android:exported="false" />
+        <activity android:name=".view.client.MesContratsActivity" android:exported="false" />
+        <activity android:name=".view.client.ClientReclamationsActivity" android:exported="false" />
+        <activity android:name=".view.client.ClientCarteGpsActivity" android:exported="false" />
+        <activity android:name=".view.client.MesPaiementsActivity" android:exported="false" />
+        <activity android:name=".view.client.MonProfilActivity" android:exported="false" />
 
-        <!-- ── FCM Firebase Messaging ─────── -->
+        <!-- Firebase Messaging Service -->
         <service
             android:name=".notification.MyFirebaseMessagingService"
             android:exported="false">
@@ -91,6 +82,37 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- Connectivity Receiver -->
+        <receiver
+            android:name=".model.sync.ConnectivityReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Employes -->
+        <activity android:name=".view.admin.GestionEmployesActivity" android:exported="false" />
+        <activity android:name=".view.admin.EmployeDetailActivity" android:exported="false" />
+        <activity android:name=".view.admin.EmployeFormActivity" android:exported="false" />
+        <activity android:name=".view.admin.EmployeDashboardActivity" android:exported="false" />
+        <activity android:name=".view.admin.EmployeProfilActivity" android:exported="false" />
+        <activity android:name=".view.admin.ReclamationsActivity" android:exported="false" />
+
+        <activity android:name=".view.admin.GestionReservationsActivity" android:exported="false" />
+        <activity android:name=".view.admin.GestionPaiementsActivity" android:exported="false" />
+        <activity android:name=".view.admin.ContratsGeneresActivity" android:exported="false" />
+        <!-- FileProvider pour generer des PDF (ContratActivity) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 
