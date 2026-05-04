@@ -1,6 +1,6 @@
- 
 package com.drivemax.app.view.client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,18 +32,20 @@ public class MesPaiementsActivity extends AppCompatActivity {
         binding.recyclerPaiements.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerPaiements.setAdapter(adapter);
         binding.btnBack.setOnClickListener(v -> finish());
+        binding.btnVersMesContrats.setOnClickListener(v ->
+                startActivity(new Intent(this, MesContratsActivity.class)));
 
         db.paiementDao().getPaiementsByClient(sessionManager.getUserId())
                 .observe(this, paiements -> {
                     if (paiements == null || paiements.isEmpty()) {
-                        binding.tvEmptyState.setVisibility(View.VISIBLE);
+                        binding.layoutEmptyPaiements.setVisibility(View.VISIBLE);
                         binding.recyclerPaiements.setVisibility(View.GONE);
                         binding.tvTotalPaiements.setText("0 MAD");
                         binding.tvNbPaiements.setText("0");
                         binding.tvPaiementsAttente.setText("0");
                         return;
                     }
-                    binding.tvEmptyState.setVisibility(View.GONE);
+                    binding.layoutEmptyPaiements.setVisibility(View.GONE);
                     binding.recyclerPaiements.setVisibility(View.VISIBLE);
                     adapter.submitList(paiements);
                     double total = 0;
