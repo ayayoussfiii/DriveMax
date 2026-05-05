@@ -15,7 +15,7 @@ Application Android de gestion de location de véhicules avec trois rôles (Admi
 7. [Configuration Firebase](#configuration-firebase)
 8. [Structure des données](#structure-des-données)
 9. [Sécurité](#sécurité)
-10. [Équipe](#équipe)
+
 
 ---
 
