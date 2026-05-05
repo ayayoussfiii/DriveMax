@@ -1,4 +1,4 @@
-# DriveMax 🚗
+# DriveMax 
 
 Application Android de gestion de location de véhicules avec trois rôles (Admin, Employé, Client), base locale Room, synchronisation Firebase Firestore, contrats PDF avec double signature et paiement simulé.
 
@@ -220,15 +220,7 @@ service cloud.firestore {
 
 ---
 
-## Équipe
 
-Projet développé dans le cadre d'un projet de fin d'études.
-
-| Rôle | Nom |
-|---|---|
-| Développeur principal | Anas Tazi |
-
----
 
 **Version** : 1.0.0  
 **Package** : `com.drivemax.app`  
