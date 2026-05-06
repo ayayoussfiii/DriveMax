@@ -368,6 +368,8 @@ service cloud.firestore {
 ```
 
 ---
+<img width="819" height="116" alt="image" src="https://github.com/user-attachments/assets/ba4e5a5b-33af-4f0d-a0cf-dcce2cee0d93" />
+
 
 ## Sécurité
 
