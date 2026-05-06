@@ -369,7 +369,8 @@ service cloud.firestore {
 
 ---
 <img width="819" height="116" alt="image" src="https://github.com/user-attachments/assets/ba4e5a5b-33af-4f0d-a0cf-dcce2cee0d93" />
-<img width="310" height="447" alt="image" src="https://github.com/user-attachments/assets/01d2222d-2096-4873-aca4-0ce7a6bf9b15" />
+<img width="818" height="212" alt="image" src="https://github.com/user-attachments/assets/e714e829-baa8-4b5f-9824-7581fd1b5b98" />
+
 
 
 ## Sécurité
