@@ -62,7 +62,7 @@ Client réserve → Employé confirme & signe → Client signe → PDF généré
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 com.drivemax.app/
@@ -81,7 +81,7 @@ com.drivemax.app/
 
 ---
 
-## 🔄 Flux métier
+##  Flux métier
 
 ### Réservation
 ```
@@ -108,7 +108,7 @@ DISPONIBLE ──(confirmation)──► LOUEE ──(retour)──► DISPONIBL
 
 ---
 
-## 💾 Stockage des données
+##  Stockage des données
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -132,7 +132,7 @@ DISPONIBLE ──(confirmation)──► LOUEE ──(retour)──► DISPONIBL
 
 ---
 
-## 🗄️ Base de données Room — Tables
+##  Base de données Room — Tables
 
 <details>
 <summary><strong>Table voitures</strong></summary>
@@ -215,7 +215,7 @@ DISPONIBLE ──(confirmation)──► LOUEE ──(retour)──► DISPONIBL
 
 ---
 
-## ☁️ Firebase Firestore — Collections
+##  Firebase Firestore — Collections
 
 | Collection | Description |
 |---|---|
@@ -229,7 +229,7 @@ DISPONIBLE ──(confirmation)──► LOUEE ──(retour)──► DISPONIBL
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 ### Prérequis
 - Android Studio Hedgehog ou supérieur
