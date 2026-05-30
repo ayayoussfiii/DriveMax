@@ -1,34 +1,51 @@
-# DriveMax 
+# 🚗 DriveMax
 
-Application Android de gestion de location de véhicules avec trois rôles (Admin, Employé, Client), base locale Room (SQLite), synchronisation Firebase Firestore, contrats PDF avec double signature et paiement simulé.
+<p align="center">
+  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Firebase-Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Room-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Min_SDK-26-brightgreen?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue?style=for-the-badge"/>
+</p>
 
----
-
-## Table des matières
-
-1. [Présentation](#présentation)
-2. [Technologies utilisées](#technologies-utilisées)
-3. [Architecture du projet](#architecture-du-projet)
-4. [Rôles et fonctionnalités](#rôles-et-fonctionnalités)
-5. [Flux métier](#flux-métier)
-6. [Stockage des données](#stockage-des-données)
-7. [Base de données Room — Tables complètes](#base-de-données-room--tables-complètes)
-8. [Firebase Firestore — Collections](#firebase-firestore--collections)
-9. [SharedPreferences](#sharedpreferences)
-10. [Installation](#installation)
-11. [Configuration Firebase](#configuration-firebase)
-12. [Sécurité](#sécurité)
-
+<p align="center">
+  Application Android complète de gestion de location de véhicules.<br/>
+  Trois rôles · Base locale Room · Sync Firestore · Contrats PDF double signature · Paiement simulé
+</p>
 
 ---
 
-## Présentation
+## ✨ Ce que fait DriveMax
 
-DriveMax est une application Android complète pour agences de location de véhicules. Elle permet de gérer l'ensemble du cycle de vie d'une location : catalogue véhicules, réservations, contrats PDF avec signatures numériques, paiements simulés, réclamations et statistiques avancées.
+DriveMax couvre l'intégralité du cycle de vie d'une agence de location :
+
+```
+Client réserve → Employé confirme & signe → Client signe → PDF généré → Paiement → Accusé AR-DM-xxxx
+```
+
+| Rôle | Accès |
+|---|---|
+| 👤 **Client** | Catalogue, réservation, signature contrat, paiement, réclamations |
+| 👷 **Employé** | Tâches du jour, confirmation réservations, signature contrat étape 1 |
+| 🔑 **Admin** | KPI, statistiques, sécurité, santé flotte, gestion complète |
 
 ---
 
-## Technologies utilisées
+## 📱 Fonctionnalités clés
+
+- **Double signature numérique** — employé (étape 1) puis client (étape 2), PDF généré automatiquement
+- **Mode hors ligne** — Room/SQLite local + sync automatique Firestore au retour de connexion
+- **Notifications push** — FCM intégré, alertes de réservation en temps réel
+- **OCR ML Kit** — scan CIN directement depuis la caméra
+- **Anti brute-force** — blocage 2 min après 5 échecs de connexion
+- **Centre de sécurité** — score /100 avec alertes et recommandations (Admin)
+- **Maintenance prédictive** — alertes kilométrage et santé flotte (Admin)
+- **Paiement simulé** — référence `AR-DM-xxxx`, accusé enregistré et synchronisé
+
+---
+
+## 🛠️ Stack technique
 
 | Technologie | Usage |
 |---|---|
@@ -38,102 +55,64 @@ DriveMax est une application Android complète pour agences de location de véhi
 | Firebase Firestore | Synchronisation cloud |
 | Firebase Auth | Authentification |
 | Firebase Messaging (FCM) | Notifications push |
-| ViewBinding / Material | Interface utilisateur |
+| ML Kit (OCR) | Scan CIN |
+| ViewBinding / Material 3 | Interface utilisateur |
 | RecyclerView + DiffUtil | Listes performantes |
-| ML Kit (OCR) | Scan CIN sur contrat |
 | ContratPdfHelper | Génération PDF contrats |
 
 ---
 
-## Architecture du projet
+## 🏗️ Architecture
 
 ```
 com.drivemax.app/
 ├── model/
-│   ├── entities/        # Client, Voiture, Reservation, Paiement, Reclamation, Employe, Utilisateur
-│   ├── dao/             # VoitureDao, ClientDao, ReservationDao, PaiementDao, ReclamationDao...
-│   ├── database/        # AppDatabase (Room - singleton)
-│   └── sync/            # SyncManager (Firestore ↔ Room via flag synced)
+│   ├── entities/     # Client, Voiture, Reservation, Paiement, Reclamation, Employe, Utilisateur
+│   ├── dao/          # VoitureDao, ClientDao, ReservationDao, PaiementDao, ReclamationDao...
+│   ├── database/     # AppDatabase (Room singleton)
+│   └── sync/         # SyncManager (Firestore ↔ Room via flag synced)
 ├── view/
-│   ├── auth/            # SplashActivity, LoginActivity, RegisterActivity, SessionManager
-│   ├── admin/           # Dashboard, Stats, Clients, Voitures, Reservations, Contrats, Securite...
-│   ├── employe/         # Dashboard Employé, Tâches, Réservations, Paiements
-│   └── client/          # Dashboard Client, Catalogue, Réservations, Contrats, Paiements
-└── utils/               # ContratPdfHelper, ContratSignatureUtil, ContratSignatureSteps, Constants
+│   ├── auth/         # SplashActivity, LoginActivity, RegisterActivity, SessionManager
+│   ├── admin/        # Dashboard, Stats, Clients, Voitures, Réservations, Contrats, Sécurité
+│   ├── employe/      # Dashboard, Tâches, Réservations, Paiements
+│   └── client/       # Dashboard, Catalogue, Réservations, Contrats, Paiements
+└── utils/            # ContratPdfHelper, ContratSignatureUtil, Constants
 ```
 
 ---
 
-## Rôles et fonctionnalités
-
-### 👤 Client
-- Inscription / Connexion Firebase Auth
-- Catalogue véhicules disponibles
-- Nouvelle réservation avec sélection de dates
-- Timeline visuelle de progression de réservation
-- Signature numérique du contrat (étape 2)
-- Paiement simulé avec accusé de réception (référence AR-DM-…)
-- Mes paiements, mes réclamations, mon profil
-
-### 👷 Employé
-- Dashboard avec statistiques en temps réel
-- Tâches du jour avec priorité (haute / moyenne / basse)
-- Gestion réservations : confirmation, changement de statut
-- Génération et validation des contrats
-- Signature employé (étape 1 du contrat)
-- Gestion voitures et clients (ajout / modification / suppression)
-- Accès liste des paiements et accusés
-
-### 🔑 Admin
-- Dashboard complet avec KPI et insights business automatiques
-- Statistiques avancées avec filtres période (Aujourd'hui / 7j / 30j)
-- Centre de sécurité (score /100, alertes, recommandations)
-- Santé flotte (maintenance prédictive, alertes kilométrage)
-- Intelligence business (insights automatiques depuis Room)
-- Gestion complète : clients, voitures, réservations, contrats, paiements, employés
-- Anti brute-force login (blocage 2 min après 5 échecs)
-
----
-
-## Flux métier
+## 🔄 Flux métier
 
 ### Réservation
 ```
-EN_ATTENTE → CONFIRMEE → EN_COURS → TERMINEE / ANNULEE
+EN_ATTENTE → CONFIRMEE → EN_COURS → TERMINEE
+                                  ↘ ANNULEE
 ```
 
 ### Contrat (double signature)
 ```
-1. Employé signe   → statut : ATTENTE_CLIENT
-2. Client signe    → statut : COMPLET
-3. PDF généré      → partageable / imprimable
+Employé signe  →  ATTENTE_CLIENT
+Client signe   →  COMPLET
+PDF généré     →  partageable / imprimable
 ```
 
 ### Paiement
 ```
-Client clique "Payer" → Paiement créé (statut : PAYE)
-→ Référence AR-DM-xxxx générée
-→ Accusé enregistré dans Room
-→ Upload Firestore
-→ Visible Admin + Employé
+Client "Payer" → PAYE → AR-DM-xxxx → Room → Firestore → visible Admin + Employé
 ```
 
-### Statut Voiture
+### Statut véhicule
 ```
-DISPONIBLE → LOUEE      (confirmation réservation)
-LOUEE      → DISPONIBLE (retour du véhicule)
+DISPONIBLE ──(confirmation)──► LOUEE ──(retour)──► DISPONIBLE
 ```
 
 ---
 
-## Stockage des données
-
-Les données sont stockées à **trois niveaux** :
+## 💾 Stockage des données
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │  Téléphone (local)                                      │
-│                                                         │
 │  ┌─────────────────┐    ┌──────────────────────────┐   │
 │  │  Room (SQLite)  │    │  SharedPreferences       │   │
 │  │  drivemax_db    │    │  Session, thème, tâches  │   │
@@ -144,183 +123,113 @@ Les données sont stockées à **trois niveaux** :
             ▼
 ┌─────────────────────────────────────────────────────────┐
 │  Firebase Firestore (cloud)                             │
-│  Collections : clients, voitures, reservations...      │
+│  clients · voitures · reservations · paiements · ...   │
 └─────────────────────────────────────────────────────────┘
 ```
 
-- **Hors ligne** : l'app lit Room et fonctionne normalement
-- **En ligne** : SyncManager synchronise automatiquement vers Firestore
-- **Chemin SQLite** : `/data/data/com.drivemax.app/databases/drivemax_db`
+> **Hors ligne** : l'app lit Room et fonctionne normalement.  
+> **En ligne** : SyncManager synchronise automatiquement les entités avec `synced = false`.
 
 ---
 
-## Base de données Room — Tables complètes
+## 🗄️ Base de données Room — Tables
 
-### Table `voitures`
+<details>
+<summary><strong>Table voitures</strong></summary>
 
-| Colonne | Type Room | Description |
+| Colonne | Type | Description |
 |---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `marque` | TEXT | Marque du véhicule |
-| `modele` | TEXT | Modèle du véhicule |
-| `annee` | INTEGER | Année de fabrication |
-| `immatriculation` | TEXT | Plaque d'immatriculation |
-| `couleur` | TEXT | Couleur |
-| `prix_journalier` | REAL | Prix par jour (MAD) |
-| `statut` | TEXT | `DISPONIBLE` / `LOUEE` / `MAINTENANCE` |
-| `kilometrage` | INTEGER | Kilométrage actuel |
-| `carburant` | TEXT | `ESSENCE` / `DIESEL` / `ELECTRIQUE` / `HYBRIDE` |
-| `transmission` | TEXT | `MANUELLE` / `AUTOMATIQUE` |
-| `nombre_places` | INTEGER | Nombre de places |
-| `image_url` | TEXT | URL photo du véhicule |
-| `latitude` | REAL | Position GPS latitude |
-| `longitude` | REAL | Position GPS longitude |
-| `description` | TEXT | Description libre |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
+| id | TEXT PK | UUID unique |
+| marque | TEXT | Marque du véhicule |
+| modele | TEXT | Modèle |
+| annee | INTEGER | Année de fabrication |
+| immatriculation | TEXT | Plaque |
+| couleur | TEXT | Couleur |
+| prix_journalier | REAL | Prix/jour (MAD) |
+| statut | TEXT | DISPONIBLE / LOUEE / MAINTENANCE |
+| kilometrage | INTEGER | Kilométrage actuel |
+| carburant | TEXT | ESSENCE / DIESEL / ELECTRIQUE / HYBRIDE |
+| transmission | TEXT | MANUELLE / AUTOMATIQUE |
+| nombre_places | INTEGER | Nombre de places |
+| image_url | TEXT | URL photo |
+| latitude / longitude | REAL | Position GPS |
+| description | TEXT | Description libre |
+| synced | INTEGER | Flag sync Firestore |
 
----
+</details>
 
-### Table `clients`
+<details>
+<summary><strong>Table clients</strong></summary>
 
-| Colonne | Type Room | Description |
+| Colonne | Type | Description |
 |---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `nom` | TEXT | Nom de famille |
-| `prenom` | TEXT | Prénom |
-| `email` | TEXT | Adresse email |
-| `telephone` | TEXT | Numéro de téléphone |
-| `cin` | TEXT | Carte d'identité nationale |
-| `permis_numero` | TEXT | Numéro de permis de conduire |
-| `adresse` | TEXT | Adresse postale |
-| `date_naissance` | TEXT | Date de naissance |
-| `fcm_token` | TEXT | Token Firebase Messaging |
-| `date_creation` | INTEGER | Timestamp création compte |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
+| id | TEXT PK | UUID unique |
+| nom / prenom | TEXT | Identité |
+| email | TEXT | Email |
+| telephone | TEXT | Téléphone |
+| cin | TEXT | Carte d'identité nationale |
+| permis_numero | TEXT | Numéro de permis |
+| adresse | TEXT | Adresse postale |
+| date_naissance | TEXT | Date de naissance |
+| fcm_token | TEXT | Token Firebase Messaging |
+| date_creation | INTEGER | Timestamp création |
+| synced | INTEGER | Flag sync Firestore |
 
----
+</details>
 
-### Table `reservations`
+<details>
+<summary><strong>Table reservations</strong></summary>
 
-| Colonne | Type Room | Description |
+| Colonne | Type | Description |
 |---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `client_id` | TEXT | Référence → `clients.id` |
-| `voiture_id` | TEXT | Référence → `voitures.id` |
-| `date_debut` | INTEGER | Timestamp début location |
-| `date_fin` | INTEGER | Timestamp fin location |
-| `prix_total` | REAL | Montant total (MAD) |
-| `statut` | TEXT | `EN_ATTENTE` / `CONFIRMEE` / `EN_COURS` / `TERMINEE` / `ANNULEE` |
-| `lieu_prise_en_charge` | TEXT | Lieu de prise en charge |
-| `lieu_retour` | TEXT | Lieu de retour |
-| `notes` | TEXT | Notes libres |
-| `contrat_pdf_url` | TEXT | Chemin local du PDF généré |
-| `contrat_etape_sign` | TEXT | `ATTENTE_CLIENT` / `COMPLET` |
-| `sig_employe_b64` | TEXT | Signature employé (Base64 PNG) |
-| `sig_client_b64` | TEXT | Signature client (Base64 PNG) |
-| `date_creation` | INTEGER | Timestamp de création |
-| `alerte_envoyee` | INTEGER (bool) | Notification push envoyée |
-| `mode_paiement` | TEXT | Mode de paiement utilisé |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
+| id | TEXT PK | UUID unique |
+| client_id | TEXT | → clients.id |
+| voiture_id | TEXT | → voitures.id |
+| date_debut / date_fin | INTEGER | Timestamps location |
+| prix_total | REAL | Montant total (MAD) |
+| statut | TEXT | EN_ATTENTE / CONFIRMEE / EN_COURS / TERMINEE / ANNULEE |
+| lieu_prise_en_charge | TEXT | Lieu de prise en charge |
+| lieu_retour | TEXT | Lieu de retour |
+| contrat_pdf_url | TEXT | Chemin local PDF |
+| contrat_etape_sign | TEXT | ATTENTE_CLIENT / COMPLET |
+| sig_employe_b64 | TEXT | Signature employé (Base64) |
+| sig_client_b64 | TEXT | Signature client (Base64) |
+| alerte_envoyee | INTEGER | Notification envoyée |
+| mode_paiement | TEXT | Mode de paiement |
+| synced | INTEGER | Flag sync Firestore |
+
+</details>
+
+<details>
+<summary><strong>Tables paiements · reclamations · employes · utilisateurs</strong></summary>
+
+**paiements** — `id, reservation_id, client_id, montant, statut, methode, reference (AR-DM-xxxx), notes, date_paiement, synced`
+
+**reclamations** — `id, client_id, reservation_id, sujet, description, statut (EN_ATTENTE/EN_COURS/TRAITE/FERME), date_creation, date_traitement, synced`
+
+**employes** — `id, nom, prenom, email, telephone, poste, date_embauche, actif, synced`
+
+**utilisateurs** — `id (UID Firebase), email, nom, role (admin/employe/client), fcm_token, date_creation, synced`
+
+</details>
 
 ---
 
-### Table `paiements`
+## ☁️ Firebase Firestore — Collections
 
-| Colonne | Type Room | Description |
-|---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `reservation_id` | TEXT | Référence → `reservations.id` |
-| `client_id` | TEXT | Référence → `clients.id` |
-| `montant` | REAL | Montant payé (MAD) |
-| `statut` | TEXT | `PAYE` / `EN_ATTENTE` / `REMBOURSE` |
-| `methode` | TEXT | `Carte (simulation)` / `Especes` / `Virement` |
-| `reference` | TEXT | Référence accusé (ex: `AR-DM-xxxx`) |
-| `notes` | TEXT | Détails accusé électronique |
-| `date_paiement` | INTEGER | Timestamp du paiement |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
+| Collection | Description |
+|---|---|
+| `utilisateurs` | Profils et rôles |
+| `clients` | Données clients |
+| `voitures` | Catalogue véhicules |
+| `reservations` | Toutes les réservations |
+| `paiements` | Historique paiements |
+| `reclamations` | Réclamations clients |
+| `employes` | Données employés |
 
 ---
 
-### Table `reclamations`
-
-| Colonne | Type Room | Description |
-|---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `client_id` | TEXT | Référence → `clients.id` |
-| `reservation_id` | TEXT | Référence → `reservations.id` |
-| `sujet` | TEXT | Sujet de la réclamation |
-| `description` | TEXT | Description détaillée |
-| `statut` | TEXT | `EN_ATTENTE` / `EN_COURS` / `TRAITE` / `FERME` |
-| `date_creation` | INTEGER | Timestamp de création |
-| `date_traitement` | INTEGER | Timestamp de traitement |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
-
----
-
-### Table `employes`
-
-| Colonne | Type Room | Description |
-|---|---|---|
-| `id` | TEXT — PrimaryKey | UUID unique |
-| `nom` | TEXT | Nom de famille |
-| `prenom` | TEXT | Prénom |
-| `email` | TEXT | Adresse email |
-| `telephone` | TEXT | Numéro de téléphone |
-| `poste` | TEXT | Poste occupé |
-| `date_embauche` | TEXT | Date d'embauche |
-| `actif` | INTEGER (bool) | Compte actif ou non |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
-
----
-
-### Table `utilisateurs`
-
-| Colonne | Type Room | Description |
-|---|---|---|
-| `id` | TEXT — PrimaryKey | UID Firebase Auth |
-| `email` | TEXT | Adresse email |
-| `nom` | TEXT | Nom complet affiché |
-| `role` | TEXT | `admin` / `employe` / `client` |
-| `fcm_token` | TEXT | Token notifications push |
-| `date_creation` | INTEGER | Timestamp création compte |
-| `synced` | INTEGER (bool) | Flag synchronisation Firestore |
-
----
-
-## Firebase Firestore — Collections
-
-| Collection | Correspond à | Description |
-|---|---|---|
-| `utilisateurs` | Table `utilisateurs` | Profils et rôles |
-| `clients` | Table `clients` | Données clients |
-| `voitures` | Table `voitures` | Catalogue véhicules |
-| `reservations` | Table `reservations` | Toutes les réservations |
-| `paiements` | Table `paiements` | Historique paiements |
-| `reclamations` | Table `reclamations` | Réclamations clients |
-| `employes` | Table `employes` | Données employés |
-
-> **Mécanisme de sync** : chaque entité a un flag `synced`. Quand `synced = false`, le `SyncManager` upload vers Firestore puis passe `synced = true`.
-
----
-
-## SharedPreferences
-
-| Clé | Type | Description |
-|---|---|---|
-| `is_logged_in` | boolean | Session active |
-| `user_id` | String | UID utilisateur connecté |
-| `user_email` | String | Email utilisateur |
-| `user_role` | String | `admin` / `employe` / `client` |
-| `user_nom` | String | Nom affiché dans le dashboard |
-| `theme_dark` | boolean | Mode sombre activé |
-| `employe_tasks_{userId}` | String (JSON) | Tâches du jour employé |
-| `login_fail_count` | int | Nombre d'échecs de connexion |
-| `login_last_fail` | long | Timestamp dernier échec |
-| `login_last_success` | long | Timestamp dernière connexion réussie |
-
----
-
-## Installation
+## 🚀 Installation
 
 ### Prérequis
 - Android Studio Hedgehog ou supérieur
@@ -329,33 +238,26 @@ Les données sont stockées à **trois niveaux** :
 
 ### Étapes
 
-**1. Cloner le projet**
 ```bash
+# 1. Cloner le projet
 git clone https://github.com/votre-repo/drivemax.git
 cd drivemax
 ```
 
-**2. Ouvrir dans Android Studio**
 ```
+# 2. Ouvrir dans Android Studio
 File → Open → sélectionner le dossier DriveMax
-```
 
-**3. Ajouter google-services.json**
-```
+# 3. Ajouter google-services.json
 Placer le fichier dans : app/google-services.json
-```
 
-**4. Builder et lancer**
-```
+# 4. Builder et lancer
 Build → Make Project
 Run → Run 'app'
 ```
 
----
+### Règles Firestore (développement)
 
-## Configuration Firebase
-
-### Règles Firestore recommandées (développement)
 ```javascript
 rules_version = '2';
 service cloud.firestore {
@@ -368,24 +270,30 @@ service cloud.firestore {
 ```
 
 ---
-<img width="819" height="116" alt="image" src="https://github.com/user-attachments/assets/ba4e5a5b-33af-4f0d-a0cf-dcce2cee0d93" />
-<img width="818" height="212" alt="image" src="https://github.com/user-attachments/assets/e714e829-baa8-4b5f-9824-7581fd1b5b98" />
 
+## 🔒 Sécurité
 
-
-## Sécurité
-
-- **Anti brute-force** : blocage 2 min après 5 échecs de connexion admin
-- **Rôles stricts** : chaque écran vérifie le rôle via `SessionManager`
-- **Données locales** : `/data/data/com.drivemax.app/databases/drivemax_db` (accès privé)
-- **Sync sécurisée** : flag `synced` sur chaque entité
-- **Firebase Auth** : authentification obligatoire pour tout accès cloud
-- **Centre de sécurité** : score /100 avec alertes et recommandations
+| Mesure | Détail |
+|---|---|
+| Anti brute-force | Blocage 2 min après 5 échecs de connexion |
+| Rôles stricts | Chaque écran vérifie le rôle via `SessionManager` |
+| Données locales | `/data/data/com.drivemax.app/databases/drivemax_db` (accès privé) |
+| Sync sécurisée | Flag `synced` sur chaque entité |
+| Firebase Auth | Authentification obligatoire pour tout accès cloud |
+| Centre de sécurité | Score /100 avec alertes et recommandations (Admin) |
 
 ---
 
-**Version** : 1.0.0  
-**Package** : `com.drivemax.app`  
-**Min SDK** : 26 (Android 8.0)  
-**Target SDK** : 34 (Android 14)  
-**Base de données** : `drivemax_db` (Room / SQLite)
+## 📋 Informations projet
+
+| Champ | Valeur |
+|---|---|
+| Version | 1.0.0 |
+| Package | `com.drivemax.app` |
+| Min SDK | 26 (Android 8.0 Oreo) |
+| Target SDK | 34 (Android 14) |
+| Base de données | `drivemax_db` (Room / SQLite) |
+
+---
+
+<p align="center">Made with ❤️ · DriveMax v1.0.0</p>
