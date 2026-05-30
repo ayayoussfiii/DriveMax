@@ -26,13 +26,13 @@ Client réserve → Employé confirme & signe → Client signe → PDF généré
 
 | Rôle | Accès |
 |---|---|
-| 👤 **Client** | Catalogue, réservation, signature contrat, paiement, réclamations |
-| 👷 **Employé** | Tâches du jour, confirmation réservations, signature contrat étape 1 |
-| 🔑 **Admin** | KPI, statistiques, sécurité, santé flotte, gestion complète |
+|  **Client** | Catalogue, réservation, signature contrat, paiement, réclamations |
+|  **Employé** | Tâches du jour, confirmation réservations, signature contrat étape 1 |
+|  **Admin** | KPI, statistiques, sécurité, santé flotte, gestion complète |
 
 ---
 
-## 📱 Fonctionnalités clés
+##  Fonctionnalités clés
 
 - **Double signature numérique** — employé (étape 1) puis client (étape 2), PDF généré automatiquement
 - **Mode hors ligne** — Room/SQLite local + sync automatique Firestore au retour de connexion
