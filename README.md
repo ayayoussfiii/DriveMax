@@ -271,7 +271,7 @@ service cloud.firestore {
 
 ---
 
-## 🔒 Sécurité
+## Sécurité
 
 | Mesure | Détail |
 |---|---|
@@ -296,4 +296,4 @@ service cloud.firestore {
 
 ---
 
-<p align="center">Made with ❤️ · DriveMax v1.0.0</p>
+<p align="center">Made by Aya · DriveMax v1.0.0</p>
