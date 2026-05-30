@@ -16,7 +16,7 @@
 
 ---
 
-## ✨ Ce que fait DriveMax
+## Ce que fait DriveMax
 
 DriveMax couvre l'intégralité du cycle de vie d'une agence de location :
 
