@@ -284,7 +284,7 @@ service cloud.firestore {
 
 ---
 
-## 📋 Informations projet
+##  Informations projet
 
 | Champ | Valeur |
 |---|---|
